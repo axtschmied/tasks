@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Tasks</title>
+</head>
+
+<body>
+    <input type="file" id="import-tasks-input" accept=".json" style="display:none">
+    <div class="buttons">
+        <button id="add-task" class="active-button">Add task</button>
+        <button id="clear-tasks" class="active-button">Clear tasks</button>
+        <button id="export-tasks" class="active-button">Export tasks</button>
+        <button id="import-tasks" class="active-button">Import tasks</button>
+    </div>
+
+    <hr>
+
+    <div id="tasks">
+        <table class="task-list" style="table-layout:fixed;">
+                <col width="30">
+                <col width="300">
+                <col width="130">
+                <col width="120">
+                <col width="400">
+                <col width="100">
+                <col width="60">
+                <col width="60">
+                <col width="60">
+            <tr id="task-header-row">
+                <th style="width:30px;">#</th>
+                <th id="summary-header" style="width:300px;">Summary</th>
+                <th id="added-date-header" style="width:130px;">Added</th>
+                <th id="originator-header" style="width:120px;">Originator</th>
+                <th id="description-header" style="width:400px;">Description</th>
+                <th id="due-date-header" style="width:100px;">Due date</th>
+                <th id="priority-header" style="width:60px;">Priority</th>
+                <th id="progress-header" style="width:60px;">Progress</th>
+                <th id="state-header" style="width:60px;">State</th>
+            </tr>
+            <tr id="sort-markers" class="sort-markers">
+                <td></td>
+                <td id="summary-sort-marker" align="center"></td>
+                <td id="added-date-sort-marker" align="center"></td>
+                <td id="originator-sort-marker" align="center"></td>
+                <td id="description-sort-marker" align="center"></td>
+                <td id="due-date-sort-marker" align="center"></td>
+                <td id="priority-sort-marker" align="center"></td>
+                <td id="progress-sort-marker" align="center"></td>
+                <td id="state-filter-marker" align="center" class="filter-button-container">
+                    <button id="finished-filter" class="filter-button active-button">Finished</button>
+                    <button id="in-progress-filter" class="filter-button active-button">In progress</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="blocker"></div>
+
+    <div id="add-task-popup" class="hidden">
+        <label id="summary-label">Summary</label>
+        <input type="text" name="summary" id="summary">
+        <label id="originator-label">Originator</label>
+        <input type="text" name="originator" id="originator">
+        <label id="description-label">Description</label>
+        <textarea rows="4" cols="70" id="description"></textarea>
+        <label id="due-date-label">Due date</label>
+        <div>
+            <input type="text" name="due-date" id="due-date" style="margin-bottom:0px;">
+            <i style="font-size:12px;margin-top:0px;padding-top:0px;">Format: yyyy-mm-dd</i>
+        </div>
+        <label id="priority-label">Priority</label>
+        <select id="priority">
+            <option value="Low">Low</option>
+            <option value="Normal">Normal</option>
+            <option value="High">High</option>
+        </select>
+        <label id="progress-label" class="hidden">Progress [%]</label>
+        <input type="number" name="progress" id="progress" class="hidden">
+        <label id="state-label" class="hidden">State</label>
+        <select id="state" class="hidden">
+            <option value="In progress">In progress</option>
+            <option value="Finished">Finished</option>
+        </select>
+        <div></div>
+        <div class="buttons">
+            <button id="add-refresh-task" class="active-button">Add task</button>
+            <button id="delete-task" class="active-button">Delete task</button>
+        </div>
+    </div>
+
+    <div id="clear-confirmation-popup" class="hidden">
+        <div style="margin-bottom:20px;grid-column-start:1;grid-column-end:3;">Are you sure that you want to clear all
+            tasks?</div>
+        <div class="buttons">
+            <button id="clear-confirmation-yes" class="active-button">Yes</button>
+            <button id="clear-confirmation-no" class="active-button">No</button>
+        </div>
+    </div>
+
+    <script src="logic.js"></script>
+    <script src="gui.js"></script>
+</body>
+
+</html>
