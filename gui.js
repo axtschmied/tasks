@@ -41,6 +41,18 @@ const tableHeaders = headerRow.querySelectorAll("th");
 const sortMarkerRow = document.querySelector("#sort-markers");
 const sortMarkers = document.querySelectorAll("td");
 
+// Search fields
+const searchFieldSelector = document.querySelector("#search-field");
+const searchTextInput = document.querySelector("#search-text");
+const searchLogicSelector = document.querySelector("#search-logic");
+
+for (let ii = 1; ii < tableHeaders.length; ii++) {
+    let option = document.createElement("option");
+    option.text = tableHeaders[ii].innerHTML;
+    option.value = ii - 1;
+    searchFieldSelector.add(option);
+}
+
 // Colors
 const greenColor = "#4CBB17";
 const redColor = "#FF2400";
@@ -52,6 +64,7 @@ let importingTasks = false;
 let clickedRow;
 let rowIndex = 2;
 let filteredTasks = {};
+let searchResults = {};
 
 // Function for adding tasks to table
 function addTaskToTable(uuid, task) {
@@ -388,6 +401,25 @@ function sortListener(col) {
     sortTasks();
     saveJson();
 }
+
+// Event listeners of the search bar
+// Search field selection changed
+searchFieldSelector.addEventListener("change", event => {
+    filterSearchResults();
+    sortTasks();
+});
+
+// Search text changed
+searchTextInput.addEventListener("input", event => {
+    filterSearchResults();
+    sortTasks();
+});
+
+// Search logic selection change
+searchLogicSelector.addEventListener("change", event => {
+    filterSearchResults();
+    sortTasks();
+});
 
 for (let ii = 1; ii < tableHeaders.length - 1; ii++) {
     tableHeaders[ii].addEventListener("click", event => sortListener(ii));

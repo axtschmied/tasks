@@ -83,6 +83,7 @@ function filterTasks() {
         }
     }
 
+    filterSearchResults();
     sortTasks();
 }
 
@@ -90,8 +91,8 @@ function filterTasks() {
 // Secondary sorting condition is always the time of addition in ascending order
 function sortTasks() {
     let auxArray = [];
-    for (key in filteredTasks) {
-        auxArray.push([key, filteredTasks[key][1], filteredTasks[key][jsonData.lastState.sortColumn - 1]]);
+    for (key in searchResults) {
+        auxArray.push([key, searchResults[key][1], searchResults[key][jsonData.lastState.sortColumn - 1]]);
     }
 
     if (jsonData.lastState.sortColumn == 6) {
@@ -156,7 +157,7 @@ function sortTasks() {
 
     clearTaskTable();
     for (let ii = 0; ii < auxArray.length; ii++) {
-        addTaskToTable(auxArray[ii][0], filteredTasks[auxArray[ii][0]]);
+        addTaskToTable(auxArray[ii][0], searchResults[auxArray[ii][0]]);
     }
 }
 
@@ -184,4 +185,46 @@ function checkFile(content) {
 // Save tasks when window is refreshed or closed
 window.onbeforeunload = function () {
     localStorage.setItem("tasksJson", JSON.stringify(jsonData));
+}
+
+// Function for filtering search results from the already filtered task list
+function filterSearchResults() {
+    searchResults = {};
+    let searchField = searchFieldSelector.value;
+    let searchText = searchTextInput.value.toLowerCase();
+    let searchLogic = searchLogicSelector.value;
+
+    if (searchText == "") {
+        for (key in filteredTasks) {
+            searchResults[key] = filteredTasks[key];
+        }
+    } else {
+        let searchExpressions = [];
+        if (searchLogic == "any-word") {
+            searchExpressions = searchText.split(/[\s,\-\+\.]+/);
+        } else if (searchLogic == "full-text") {
+            searchExpressions = [searchText];
+        }
+        for (key in filteredTasks) {
+            let textToSearchIn;
+            if (searchField == "all") {
+                textToSearchIn = filteredTasks[key].join(" ");
+            } else {
+                textToSearchIn = filteredTasks[key][searchField];
+            }
+
+            textToSearchIn = textToSearchIn.toLowerCase();
+
+            let found = false;
+            searchExpressions.forEach(txt => {
+                if (textToSearchIn.includes(txt)) {
+                    found = true;
+                }
+            });
+
+            if (found) {
+                searchResults[key] = filteredTasks[key];
+            }
+        }
+    }
 }
