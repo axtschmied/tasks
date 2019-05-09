@@ -76,7 +76,7 @@ function isDateFormatCorrect(date) {
 }
 
 // Function for filtering tasks
-function filterTasks() {
+async function filterTasks() {
     filteredTasks = {};
     for (key in jsonData.tasks) {
         if (jsonData.lastState.finishedFilter && jsonData.tasks[key][7] == "Finished") {
@@ -86,7 +86,11 @@ function filterTasks() {
         }
     }
 
-    filterSearchResults();
+    let temporarySearchResults = await filterSearchResults();
+    searchResults = {};
+    for (let key in temporarySearchResults) {
+        searchResults[key] = temporarySearchResults[key];
+    }
     sortTasks();
 }
 
@@ -192,7 +196,7 @@ window.onbeforeunload = function () {
 
 // Function for filtering search results from the already filtered task list
 function filterSearchResults() {
-    searchResults = {};
+    let temporarySearchResults = {};
     let searchField = searchFieldSelector.value;
     let searchText = searchTextInput.value.toLowerCase();
     let searchLogic = searchLogicSelector.value;
@@ -204,7 +208,7 @@ function filterSearchResults() {
 
     if (searchText == "") {
         for (key in filteredTasks) {
-            searchResults[key] = filteredTasks[key];
+            temporarySearchResults[key] = filteredTasks[key];
         }
     } else {
         let searchExpressions = [];
@@ -231,8 +235,10 @@ function filterSearchResults() {
             });
 
             if (found) {
-                searchResults[key] = filteredTasks[key];
+                temporarySearchResults[key] = filteredTasks[key];
             }
         }
     }
+
+    return temporarySearchResults;
 }

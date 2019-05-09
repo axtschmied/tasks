@@ -403,22 +403,28 @@ function sortListener(col) {
 }
 
 // Event listeners of the search bar
+async function searchBarCallback() {
+    let temporarySearchResults = await filterSearchResults();
+    searchResults = {};
+    for (let key in temporarySearchResults) {
+        searchResults[key] = temporarySearchResults[key];
+    }
+    sortTasks();
+}
+
 // Search field selection changed
 searchFieldSelector.addEventListener("change", event => {
-    filterSearchResults();
-    sortTasks();
+    searchBarCallback();
 });
 
 // Search text changed
 searchTextInput.addEventListener("input", event => {
-    filterSearchResults();
-    sortTasks();
+    searchBarCallback();
 });
 
 // Search logic selection change
 searchLogicSelector.addEventListener("change", event => {
-    filterSearchResults();
-    sortTasks();
+    searchBarCallback();
 });
 
 for (let ii = 1; ii < tableHeaders.length - 1; ii++) {
