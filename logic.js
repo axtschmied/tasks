@@ -18,9 +18,14 @@ if (localStorage.hasOwnProperty("tasksJson")) {
     }
 }
 
+// Initialize date
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
 // Function for saving the tasks into the JSON file
 function saveJson() {
-    localStorage.setItem("jsonTasks", JSON.stringify(jsonData));
+    localStorage.setItem("tasksJson", JSON.stringify(jsonData));
 }
 
 // Function for generating a unique identifier for tasks

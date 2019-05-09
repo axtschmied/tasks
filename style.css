@@ -35,9 +35,21 @@ textarea {
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(4, 190px);
+    grid-template-columns: repeat(5, 190px);
     grid-column-gap: 20px;
     margin-bottom: 10px;
+}
+
+.form-inline {
+    display: grid;
+    grid-template-columns: 30px 60px 30px 60px;
+    grid-column-gap: 20px;
+    width: 240px;
+    margin: auto;
+}
+
+label.center {
+    margin: auto;
 }
 
 .searchbar {
@@ -45,7 +57,7 @@ textarea {
     grid-template-columns: 150px 300px 150px;
     grid-column-gap: 10px;
     margin-top: 10px;
-    padding: auto;
+    margin: auto;
 }
 
 .active-button {
@@ -135,15 +147,57 @@ tr:first-child {
     background: #007ACC;
 }
 
-tr:nth-child(2n+2) {
+#task-table tr:nth-child(2n+2) {
     background: #0E0E0E;
 }
 
-tr:nth-child(2n+3) {
+#task-table tr:nth-child(2n+3) {
+    background: #2E2E2E;
+}
+
+#calendar-body tr:nth-child(odd) {
+    background: #0E0E0E;
+}
+
+#calendar-body tr:nth-child(even) {
     background: #2E2E2E;
 }
 
 hr {
     display: block;
     border: 3px solid #707070;
+}
+
+#calendar {
+    margin-top: 20px;
+}
+
+.today, .current-month-day, .prev-next-month-day {
+    height: 150px;
+}
+
+.today {
+    border: 2px solid #007ACC;
+}
+
+.current-month-day, .prev-next-month-day {
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.prev-next-month-day {
+    opacity: 0.4;
+}
+
+.subtable {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.subtable td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

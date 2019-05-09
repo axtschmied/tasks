@@ -17,6 +17,7 @@
         <button id="clear-tasks" class="active-button">Clear tasks</button>
         <button id="export-tasks" class="active-button">Export tasks</button>
         <button id="import-tasks" class="active-button">Import tasks</button>
+        <button id="switch-view" class="active-button">Switch to calendar view</button>
     </div>
     <div class="searchbar">
         <select id="search-field" style="width:150px;margin:auto;">
@@ -31,17 +32,17 @@
 
     <hr>
 
-    <div id="tasks">
+    <div id="tasks" class="hidden">
         <table class="task-list" style="table-layout:fixed;">
-                <col width="30">
-                <col width="300">
-                <col width="130">
-                <col width="120">
-                <col width="400">
-                <col width="100">
-                <col width="60">
-                <col width="60">
-                <col width="60">
+            <col width="30">
+            <col width="300">
+            <col width="130">
+            <col width="120">
+            <col width="400">
+            <col width="100">
+            <col width="60">
+            <col width="60">
+            <col width="60">
             <tr id="task-header-row">
                 <th style="width:30px;">#</th>
                 <th id="summary-header" style="width:300px;">Summary</th>
@@ -67,6 +68,59 @@
                     <button id="in-progress-filter" class="filter-button active-button">In progress</button>
                 </td>
             </tr>
+        </table>
+    </div>
+
+    <div id="tasks-calendar" style="width:1420px;">
+        <div style="display:grid;grid-template-columns:200px 400px 300px;height:40px;">
+            <h3 id="calendar-header" style="margin:auto;"></h3>
+            <div class="buttons" style="margin:auto;">
+                <button class="active-button" id="previous-month">Previous month</button>
+                <button class="active-button" id="next-month">Next month</button>
+            </div>
+
+            <form class="form-inline">
+                <label class="center">Month</label>
+                <select name="month" id="month-selector" style="width:60px;">
+                    <option value=0>Jan</option>
+                    <option value=1>Feb</option>
+                    <option value=2>Mar</option>
+                    <option value=3>Apr</option>
+                    <option value=4>May</option>
+                    <option value=5>Jun</option>
+                    <option value=6>Jul</option>
+                    <option value=7>Aug</option>
+                    <option value=8>Sep</option>
+                    <option value=9>Oct</option>
+                    <option value=10>Nov</option>
+                    <option value=11>Dec</option>
+                </select>
+
+                <label class="center">Year</label>
+                <input type="number" name="year" id="year-input" style="width:60px;">
+            </form>
+        </div>
+
+        <table id="calendar">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <thead>
+                <tr>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
+                </tr>
+            </thead>
+            <tbody id="calendar-body"></tbody>
         </table>
     </div>
 
@@ -115,6 +169,7 @@
 
     <script src="logic.js"></script>
     <script src="gui.js"></script>
+    <script src="calendar.js"></script>
 </body>
 
 </html>

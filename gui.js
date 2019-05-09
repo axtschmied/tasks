@@ -57,6 +57,8 @@ for (let ii = 1; ii < tableHeaders.length; ii++) {
 const greenColor = "#4CBB17";
 const redColor = "#FF2400";
 const normalColor = "#D4D4D4";
+const grayishGreenColor = "#59855D";
+const grayishRedColor = "#B24C4C";
 
 // State variables
 let addRefreshState = 0; // 0: add state, 1: refresh state
@@ -304,6 +306,7 @@ addRefreshButton.addEventListener("click", event => {
     }
 
     filterTasks();
+    updateCalendar(currentYear, currentMonth);
     saveJson();
 });
 
@@ -316,6 +319,7 @@ deleteTaskButton.addEventListener("click", event => {
     blocker.style.display = "none";
 
     filterTasks();
+    updateCalendar(currentYear, currentMonth);
     saveJson();
 });
 
@@ -354,6 +358,7 @@ yesButton.addEventListener("click", event => {
         importingTasks = false;
     }
 
+    updateCalendar(currentYear, currentMonth);
     saveJson();
 });
 
