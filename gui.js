@@ -433,7 +433,10 @@ document.querySelector("body").addEventListener("keypress", event => {
     }
 });
 
-// Add content from JSON, reproduce last state before closing
+// Add content from JSON, restore last state before the app was closed
+searchFieldSelector.value = jsonData.lastState.searchField;
+searchTextInput.value = jsonData.lastState.searchText;
+searchLogicSelector.value = jsonData.lastState.searchLogic;
 for (let ii = 0; ii <= 1; ii++) {
     tableHeaders[jsonData.lastState.sortColumn].click();
     finishedFilter.click();

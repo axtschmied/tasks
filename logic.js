@@ -10,7 +10,10 @@ if (localStorage.hasOwnProperty("tasksJson")) {
             sortColumn: 2,
             sortDirection: 0,
             finishedFilter: true,
-            inProgressFilter: true
+            inProgressFilter: true,
+            searchField: "all",
+            searchText: "",
+            searchLogic: "full-text"
         }
     }
 }
@@ -193,6 +196,11 @@ function filterSearchResults() {
     let searchField = searchFieldSelector.value;
     let searchText = searchTextInput.value.toLowerCase();
     let searchLogic = searchLogicSelector.value;
+
+    jsonData.lastState.searchField = searchField;
+    jsonData.lastState.searchText = searchText;
+    jsonData.lastState.searchLogic = searchLogic;
+    saveJson();
 
     if (searchText == "") {
         for (key in filteredTasks) {
