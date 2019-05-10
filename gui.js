@@ -156,6 +156,13 @@ function collectInputs() {
         task.push(0);
         task.push("In progress");
     }
+
+    if (task[5] < 0) {
+        task[5] = 0;
+    } else if (task[5] > 100) {
+        task[5] = 100;
+    }
+
     if (task[3] == "" || isDateFormatCorrect(task[3])) {
         return task;
     } else {
