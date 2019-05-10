@@ -41,6 +41,15 @@ monthSelector.addEventListener("change", event => {
     jumpToDate();
 });
 
+function hiddenTasksCallback(date) {
+    searchFieldSelector.value = 4;
+    searchTextInput.value = date;
+    searchLogicSelector.value = "full-text";
+    let inputEvent = new Event("input");
+    searchTextInput.dispatchEvent(inputEvent);
+    switchViewButton.click();
+}
+
 // Function to update the calendar, even if it is not visible
 function updateCalendar(year, month) {
     let firstDay = (new Date(year, month)).getDay();
@@ -159,6 +168,7 @@ function addTasksToCalendar(year, month) {
                         row = subtable.insertRow(subtable.rows.length);
                         row.setAttribute("hiddentasks", 1);
                         row.classList.add("hidden-tasks");
+                        row.addEventListener("click", event => hiddenTasksCallback(jsonData.tasks[key][4]));
                         let subcell = row.insertCell(row.cells.length);
                         subcell.innerHTML = "+ 1 more";
                         subcell.setAttribute("align", "right");

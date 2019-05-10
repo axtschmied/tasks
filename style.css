@@ -147,11 +147,11 @@ tr:first-child {
     background: #007ACC;
 }
 
-#task-table tr:nth-child(2n+2) {
+.task-list tr:nth-child(2n+2) {
     background: #0E0E0E;
 }
 
-#task-table tr:nth-child(2n+3) {
+.task-list tr:nth-child(2n+3) {
     background: #2E2E2E;
 }
 

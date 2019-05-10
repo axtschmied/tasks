@@ -4,12 +4,17 @@ const addTaskButton = document.querySelector("#add-task");
 const clearTasksButton = document.querySelector("#clear-tasks");
 const exportTasksButton = document.querySelector("#export-tasks");
 const importTasksButton = document.querySelector("#import-tasks");
+const switchViewButton = document.querySelector("#switch-view");
 const finishedFilter = document.querySelector("#finished-filter");
 const inProgressFilter = document.querySelector("#in-progress-filter");
 const addRefreshButton = document.querySelector("#add-refresh-task");
 const deleteTaskButton = document.querySelector("#delete-task");
 const yesButton = document.querySelector("#clear-confirmation-yes");
 const noButton = document.querySelector("#clear-confirmation-no");
+
+// Divs
+const taskListDiv = document.querySelector("#tasks");
+const calendarDiv = document.querySelector("#tasks-calendar");
 
 // Hidden input field for opening files
 const importTasksInput = document.querySelector("#import-tasks-input");
@@ -249,6 +254,23 @@ importTasksButton.addEventListener("click", event => {
     clearTasksButton.click();
 });
 
+// Switch view button
+switchViewButton.addEventListener("click", event => {
+    if (jsonData.lastState.calendarView) {
+        jsonData.lastState.calendarView = false;
+        calendarDiv.classList.add("hidden");
+        taskListDiv.classList.remove("hidden");
+        switchViewButton.innerHTML = "Switch to calendar view";
+    } else {
+        jsonData.lastState.calendarView = true;
+        taskListDiv.classList.add("hidden");
+        calendarDiv.classList.remove("hidden");
+        switchViewButton.innerHTML = "Switch to list view";
+    }
+
+    saveJson();
+});
+
 // Filter finished tasks button
 finishedFilter.addEventListener("click", event => {
     if (jsonData.lastState.finishedFilter) {
@@ -453,4 +475,9 @@ for (let ii = 0; ii <= 1; ii++) {
     tableHeaders[jsonData.lastState.sortColumn].click();
     finishedFilter.click();
     inProgressFilter.click();
+}
+
+if (jsonData.lastState.calendarView) {
+    jsonData.lastState.calendarView = false;
+    switchViewButton.click();
 }

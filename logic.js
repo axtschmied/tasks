@@ -13,7 +13,8 @@ if (localStorage.hasOwnProperty("tasksJson")) {
             inProgressFilter: true,
             searchField: "all",
             searchText: "",
-            searchLogic: "full-text"
+            searchLogic: "full-text",
+            calendarView: false
         }
     }
 }
