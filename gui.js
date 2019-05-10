@@ -59,6 +59,7 @@ const redColor = "#FF2400";
 const normalColor = "#D4D4D4";
 const grayishGreenColor = "#59855D";
 const grayishRedColor = "#B24C4C";
+const darkGrayColor = "#0E0E0E";
 
 // State variables
 let addRefreshState = 0; // 0: add state, 1: refresh state

@@ -6,7 +6,8 @@ const monthSelector = document.getElementById("month-selector");
 const previousMonthButton = document.querySelector("#previous-month");
 const nextMonthButton = document.querySelector("#next-month");
 
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const maxNumberOfRows = 4;
 
 updateCalendar(currentYear, currentMonth);
 
@@ -69,8 +70,8 @@ function updateCalendar(year, month) {
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
                 let cell = document.createElement("td");
-                let cellText = document.createTextNode((prevMonthDate + 1 < 10) ? "0" + (prevMonthDate + 1) : (prevMonthDate + 1));
-                cell.id = "calendar-" + prevYear + "-" + (prevMonth < 10 ? "0" + prevMonth : prevMonth) + "-" + (prevMonthDate < 10 ? "0" + prevMonthDate : prevMonthDate);
+                let cellText = document.createTextNode((prevMonthDate < 10) ? "0" + (prevMonthDate) : (prevMonthDate));
+                cell.id = "calendar-" + prevYear + "-" + (prevMonth + 1 < 10 ? "0" + (prevMonth + 1) : (prevMonth + 1)) + "-" + (prevMonthDate < 10 ? "0" + prevMonthDate : prevMonthDate);
                 cell.classList.add("prev-next-month-day");
                 cell.setAttribute("valign", "top");
                 cell.appendChild(cellText);
@@ -79,8 +80,8 @@ function updateCalendar(year, month) {
             }
             else if (date > daysInMonth) {
                 let cell = document.createElement("td");
-                let cellText = document.createTextNode((nextMonthDate + 1 < 10) ? "0" + (nextMonthDate + 1) : (nextMonthDate + 1));
-                cell.id = "calendar-" + nextYear + "-" + (nextMonth < 10 ? "0" + nextMonth : nextMonth) + "-" + (nextMonthDate < 10 ? "0" + nextMonthDate : nextMonthDate);
+                let cellText = document.createTextNode((nextMonthDate < 10) ? "0" + (nextMonthDate) : (nextMonthDate));
+                cell.id = "calendar-" + nextYear + "-" + (nextMonth + 1 < 10 ? "0" + (nextMonth + 1) : (nextMonth + 1)) + "-" + (nextMonthDate < 10 ? "0" + nextMonthDate : nextMonthDate);
                 cell.classList.add("prev-next-month-day");
                 cell.setAttribute("valign", "top");
                 cell.appendChild(cellText);
@@ -132,16 +133,36 @@ function addTasksToCalendar(year, month) {
                     cell.appendChild(subtable);
                 }
 
-                let row = subtable.insertRow(subtable.rows.length);
-                row.addEventListener("click", event => taskRowCallback(row));
-                row.setAttribute("uuid", key);
-                let subcell = row.insertCell(row.cells.length);
-                subcell.innerHTML = jsonData.tasks[key][0];
+                if (subtable.rows.length < maxNumberOfRows) {
+                    let row = subtable.insertRow(subtable.rows.length);
+                    row.addEventListener("click", event => taskRowCallback(row));
+                    row.setAttribute("uuid", key);
+                    let subcell = row.insertCell(row.cells.length);
+                    subcell.innerHTML = jsonData.tasks[key][0];
 
-                if (jsonData.tasks[key][7] == "Finished") {
-                    row.style.backgroundColor = grayishGreenColor;
-                } else if (taskExpired(jsonData.tasks[key][4])) {
-                    row.style.backgroundColor = grayishRedColor;
+                    if (jsonData.tasks[key][7] == "Finished") {
+                        row.style.backgroundColor = grayishGreenColor;
+                    } else if (taskExpired(jsonData.tasks[key][4])) {
+                        row.style.backgroundColor = grayishRedColor;
+                    } else {
+                        row.style.backgroundColor = darkGrayColor;
+                    }
+                } else {
+                    let row = subtable.querySelector(".hidden-tasks");
+                    if (row) {
+                        let hiddenTasks = parseInt(row.getAttribute("hiddentasks"));
+                        hiddenTasks++;
+                        row.setAttribute("hiddentasks", hiddenTasks);
+                        let subcell = row.querySelector("td");
+                        subcell.innerHTML = "+ " + hiddenTasks + " more";
+                    } else {
+                        row = subtable.insertRow(subtable.rows.length);
+                        row.setAttribute("hiddentasks", 1);
+                        row.classList.add("hidden-tasks");
+                        let subcell = row.insertCell(row.cells.length);
+                        subcell.innerHTML = "+ 1 more";
+                        subcell.setAttribute("align", "right");
+                    }
                 }
             }
         }

@@ -155,11 +155,7 @@ tr:first-child {
     background: #2E2E2E;
 }
 
-#calendar-body tr:nth-child(odd) {
-    background: #0E0E0E;
-}
-
-#calendar-body tr:nth-child(even) {
+#calendar-body tr {
     background: #2E2E2E;
 }
 
@@ -173,7 +169,7 @@ hr {
 }
 
 .today, .current-month-day, .prev-next-month-day {
-    height: 150px;
+    height: 155px;
 }
 
 .today {
