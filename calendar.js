@@ -147,7 +147,7 @@ function addTasksToCalendar(year, month) {
                     row.addEventListener("click", event => taskRowCallback(row));
                     row.setAttribute("uuid", key);
                     let subcell = row.insertCell(row.cells.length);
-                    subcell.innerHTML = jsonData.tasks[key][0];
+                    subcell.innerHTML = jsonData.tasks[key][0] == "" ? "&nbsp;" : jsonData.tasks[key][0];
 
                     if (jsonData.tasks[key][7] == "Finished") {
                         row.style.backgroundColor = grayishGreenColor;
