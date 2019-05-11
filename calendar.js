@@ -146,8 +146,30 @@ function addTasksToCalendar(year, month) {
                     let row = subtable.insertRow(subtable.rows.length);
                     row.addEventListener("click", event => taskRowCallback(row));
                     row.setAttribute("uuid", key);
+                    row.style.padding = "0px";
+                    row.style.margin = "0px";
                     let subcell = row.insertCell(row.cells.length);
-                    subcell.innerHTML = jsonData.tasks[key][0] == "" ? "&nbsp;" : jsonData.tasks[key][0];
+                    let subcellContent = document.createElement("div");
+                    subcellContent.classList.add("subcell-content");
+                    subcellContent.innerHTML = jsonData.tasks[key][0] == "" ? "&nbsp;" : jsonData.tasks[key][0];
+                    subcell.appendChild(subcellContent);
+
+                    let progressBarDiv = document.createElement("div");
+                    progressBarDiv.classList.add("progress-bar");
+                    subcell.appendChild(progressBarDiv);
+
+                    if (jsonData.tasks[key][6] > 0) {
+                        let progressBar = document.createElement("div");
+                        progressBar.classList.add("progress-bar-done");
+                        progressBar.style.width = jsonData.tasks[key][6] + "%";
+                        progressBarDiv.appendChild(progressBar);
+                    }
+                    if (jsonData.tasks[key][6] < 100) {
+                        let progressBar = document.createElement("div");
+                        progressBar.classList.add("progress-bar-remaining");
+                        progressBar.style.width = (100 - jsonData.tasks[key][6]) + "%";
+                        progressBarDiv.appendChild(progressBar);
+                    }
 
                     if (jsonData.tasks[key][7] == "Finished") {
                         row.style.backgroundColor = grayishGreenColor;
