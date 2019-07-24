@@ -15,7 +15,8 @@ button:active {
     background-color: #707070;
 }
 
-input, select {
+input,
+select {
     display: block;
     background-color: #D4D4D4;
     border: 0px;
@@ -79,7 +80,8 @@ label.center {
     padding: 3px;
 }
 
-.ascending, .descending {
+.ascending,
+.descending {
     font-size: 12px;
 }
 
@@ -125,13 +127,16 @@ label.center {
     opacity: 0.8;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 8;
 }
 
-table, tr, th, td {
+table,
+tr,
+th,
+td {
     border: 0px;
 }
 
@@ -168,7 +173,9 @@ hr {
     margin-top: 20px;
 }
 
-.today, .current-month-day, .prev-next-month-day {
+.today,
+.current-month-day,
+.prev-next-month-day {
     height: 155px;
 }
 
@@ -176,7 +183,8 @@ hr {
     border: 2px solid #007ACC;
 }
 
-.current-month-day, .prev-next-month-day {
+.current-month-day,
+.prev-next-month-day {
     border: 2px solid rgba(0, 0, 0, 0);
 }
 
@@ -216,7 +224,8 @@ hr {
     margin: 0px;
 }
 
-.progress-bar-done, .progress-bar-remaining {
+.progress-bar-done,
+.progress-bar-remaining {
     position: absolute;
     bottom: 0px;
     padding: 0px;
