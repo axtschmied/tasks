@@ -15,8 +15,7 @@ button:active {
     background-color: #707070;
 }
 
-input,
-select {
+input, select {
     display: block;
     background-color: #D4D4D4;
     border: 0px;
@@ -80,8 +79,7 @@ label.center {
     padding: 3px;
 }
 
-.ascending,
-.descending {
+.ascending, .descending {
     font-size: 12px;
 }
 
@@ -133,10 +131,7 @@ label.center {
     z-index: 8;
 }
 
-table,
-tr,
-th,
-td {
+table, tr, th, td {
     border: 0px;
 }
 
@@ -173,9 +168,7 @@ hr {
     margin-top: 20px;
 }
 
-.today,
-.current-month-day,
-.prev-next-month-day {
+.today, .current-month-day, .prev-next-month-day {
     height: 155px;
 }
 
@@ -183,8 +176,7 @@ hr {
     border: 2px solid #007ACC;
 }
 
-.current-month-day,
-.prev-next-month-day {
+.current-month-day, .prev-next-month-day {
     border: 2px solid rgba(0, 0, 0, 0);
 }
 
@@ -224,8 +216,7 @@ hr {
     margin: 0px;
 }
 
-.progress-bar-done,
-.progress-bar-remaining {
+.progress-bar-done, .progress-bar-remaining {
     position: absolute;
     bottom: 0px;
     padding: 0px;
@@ -241,4 +232,82 @@ hr {
 .progress-bar-remaining {
     background-color: #707070;
     right: 0px;
+}
+
+/* List styles */
+ol {
+    list-style: none;
+    counter-reset: item;
+    padding-left: 0.5cm;
+    margin-top: 0.2cm;
+    margin-bottom: 0.2cm;
+    position: relative;
+}
+
+ol li {
+    counter-increment: item;
+    margin: 0.25rem;
+}
+
+ol li::before {
+    content: counter(item);
+    background: #003D66;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 1.2rem;
+    color: white;
+    text-align: center;
+    margin-right: 0.5rem;
+    position: absolute;
+    left: 0;
+}
+
+ol ol li::before {
+    background: #005B99;
+}
+
+ol ol ol li::before {
+    background: #007ACC;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0.5cm;
+    margin-top: 0.2cm;
+    margin-bottom: 0.2cm;
+    position: relative;
+}
+
+ul li {
+    margin: 0.25rem;
+}
+
+ul li::before {
+    content: "";
+    background: #007ACC;
+    margin-top: 0.25rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    display: inline-block;
+    line-height: 1rem;
+    color: white;
+    text-align: center;
+    margin-right: 0.5rem;
+    position: absolute;
+    left: 0;
+}
+
+ul ul li::before {
+    margin-top: 0.3rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.4rem;
+}
+
+ul ul ul li::before {
+    margin-top: 0.4rem;
+    width: 0.3rem;
+    height: 0.3rem;
 }
